@@ -18,9 +18,22 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
+
+        // 通常ログインしている場合は強制的にホーム画面へリダイレクト
+        if (Auth::guard()->check()) {
             return redirect(RouteServiceProvider::HOME);
         }
+        // スタッフログインしている場合は強制的にスタッフホームへリダイレクト
+        if (Auth::guard('staff')->check()) {
+            return redirect(RouteServiceProvider::STAFF_HOME);
+        }
+
+        // if (Auth::guard($guard)->check()) {
+        //     if ($guard == 'staff') {
+        //         return redirect(RouteServiceProvider::STAFF_HOME);
+        //     }
+        //     return redirect(RouteServiceProvider::HOME);
+        // }
 
         return $next($request);
     }

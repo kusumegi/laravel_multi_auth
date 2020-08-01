@@ -14,9 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return redirect('/login');
 });
 
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+
+
+// 管理者用
+Route::prefix('staff')->namespace('Staff')->name('staff.')->group(function () {
+    Auth::routes([
+        'verify' => false,
+    ]);
+    Route::get('/home', 'StaffHomeController@index')->name('staff_home');
+});
