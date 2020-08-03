@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/home{any}', 'HomeController@index')->where('any', '(/?$|/.*)')->name('home')->middleware('verified');
 
 
 // 管理者用
@@ -28,5 +28,5 @@ Route::prefix('staff')->namespace('Staff')->name('staff.')->group(function () {
     Auth::routes([
         'verify' => false,
     ]);
-    Route::get('/home', 'StaffHomeController@index')->name('staff_home');
+    Route::get('/home{any}', 'StaffHomeController@index')->where('any', '(/?$|/.*)')->name('staff_home');
 });

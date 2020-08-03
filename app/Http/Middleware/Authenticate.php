@@ -16,8 +16,8 @@ class Authenticate extends Middleware
     {
         if (!$request->expectsJson()) {
             // 管理者ログインの場合
-            if ($request->is('employee/*')) {
-                return route('employee.login');
+            if ($request->is('staff/*')) {
+                return route('staff.login');
             }
 
             // 通常ログインの場合

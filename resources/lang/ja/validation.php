@@ -130,7 +130,11 @@ return [
 
     'custom' => [
         'attribute-name' => [
-            'rule-name' => 'custom-message',
+            'rule-name' => 'custom-message', // sample
+            'email' => 'メールアドレス',
+            'password' => 'パスワード',
+            'password_confirmation' => 'パスワード(確認)',
+            'name' => 'ユーザ名',
         ],
     ],
 
