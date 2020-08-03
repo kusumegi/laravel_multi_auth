@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class StaffHomeController extends Controller
 {
@@ -24,7 +26,9 @@ class StaffHomeController extends Controller
      */
     public function index()
     {
-        // view/staff/home.blade.php
-        return view('staff.home');
+        // $user = Auth::user();
+        // Log::debug("StaffHomeController： " . $user);
+
+        return view('spa.staff');
     }
 }

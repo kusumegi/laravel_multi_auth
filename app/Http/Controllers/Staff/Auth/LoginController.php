@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Staff\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -60,5 +63,25 @@ class LoginController extends Controller
     protected function guard()
     {
         return Auth::guard('staff');
+    }
+
+    /**
+     * ログイン時にユーザー情報を返却する
+     * AuthenticatesUsers->authenticated をオーバーライド
+     */
+    protected function authenticated(Request $request, $user)    //追加
+    {
+        logger('staff:LoginController->authenticated');
+        Log::debug($user);
+    }
+
+    /**
+     * ログアウト時処理
+     * セッションの再生成を行う
+     * AuthenticatesUsers->loggedOut をオーバーライド
+     */
+    protected function loggedOut(Request $request)
+    {
+        $request->session()->regenerate();
     }
 }
